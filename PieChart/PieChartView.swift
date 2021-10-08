@@ -83,6 +83,8 @@ class PieChartView: UIView {
         animation.duration = getDuration(slice)
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.delegate = self
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = .forwards
         
         let canvasWidth = canvasView.frame.width
         let path = UIBezierPath(arcCenter: canvasView.center,
@@ -96,7 +98,7 @@ class PieChartView: UIView {
         sliceLayer.fillColor = nil
         sliceLayer.strokeColor = slice.color.cgColor
         sliceLayer.lineWidth = canvasWidth * 2 / 8
-        sliceLayer.strokeEnd = 1
+        sliceLayer.strokeEnd = 0
         sliceLayer.add(animation, forKey: animation.keyPath)
         
         canvasView.layer.addSublayer(sliceLayer)
